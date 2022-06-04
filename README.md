@@ -17,6 +17,10 @@
   * 模块化表格、按需加载、扩展接口
   * 为单行编辑表格而设计，支持增删改查及更多扩展，强大的功能的同时兼具性能
 
+## Setaria
+
+[新增/修改内容](https://github.com/setariajs/vxe-table/blob/current/CHANGELOG.md)
+
 ## QQ 交流群
 
 ![qq](https://gitee.com/xuliangzhan_admin/vxe-table/raw/master/public/static/donation/qq.png)
