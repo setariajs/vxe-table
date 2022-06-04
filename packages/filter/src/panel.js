@@ -149,7 +149,7 @@ export default {
       const filterStore = this.filterStore
       filterStore.options.forEach(option => {
         option._checked = value
-        // option.checked = value
+        option.checked = value
       })
       filterStore.isAllSelected = value
       filterStore.isIndeterminate = false
