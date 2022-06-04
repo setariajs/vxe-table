@@ -240,6 +240,16 @@ function renderColumn (h, _vm, $xetable, seq, rowid, fixedType, rowLevel, row, r
       }, column.renderCell(h, params))
     )
     if (showValidTip && hasValidError) {
+      const { $refs } = $xetable
+      const { tableBody } = $refs
+      const bodyElem = tableBody.$el
+      if ($xetable.rowHeight === bodyElem.clientHeight) {
+        validStore.originBodyHeight = bodyElem.clientHeight
+        const height = bodyElem.clientHeight + $xetable.rowHeight
+        bodyElem.style.height = `${height}px`
+        console.log('[vxe-table] increase body height temporary to show error message')
+        validStore.currentBodyHeight = height
+      }
       tdVNs.push(
         h('div', {
           class: 'vxe-cell--valid',

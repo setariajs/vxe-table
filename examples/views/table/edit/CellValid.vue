@@ -24,24 +24,18 @@
       border
       show-overflow
       keep-source
-      height="500"
       ref="xTable"
+      max-height="300"
       :data="tableData"
       :edit-rules="validRules"
       :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}">
       <vxe-column type="checkbox" width="60"></vxe-column>
       <vxe-column type="seq" width="60"></vxe-column>
-      <vxe-colgroup title="分组1">
-        <vxe-column field="name" title="Name" :edit-render="{name: 'input'}"></vxe-column>
-        <vxe-column field="role" title="Role" :edit-render="{name: '$input'}"></vxe-column>
-      </vxe-colgroup>
-      <vxe-colgroup title="分组2">
-        <vxe-colgroup title="分组21">
-          <vxe-column field="sex2" title="Sex" :edit-render="{name: 'input'}"></vxe-column>
-          <vxe-column field="age" title="Age" :edit-render="{name: '$input', props: {type: 'integer'}}"></vxe-column>
-          <vxe-column field="date" title="Date" :edit-render="{name: '$input', props: {type: 'date'}}"></vxe-column>
-        </vxe-colgroup>
-      </vxe-colgroup>
+      <vxe-column field="name" title="Name" :edit-render="{name: 'input'}"></vxe-column>
+      <vxe-column field="role" title="Role" :edit-render="{name: '$input'}"></vxe-column>
+      <vxe-column field="sex2" title="Sex" :edit-render="{name: 'input'}"></vxe-column>
+      <vxe-column field="age" title="Age" :edit-render="{name: '$input', props: {type: 'integer'}}"></vxe-column>
+      <vxe-column field="date" title="Date" :edit-render="{name: '$input', props: {type: 'date'}}"></vxe-column>
     </vxe-table>
 
     <p class="demo-code">{{ $t('app.body.button.showCode') }}</p>
@@ -50,6 +44,46 @@
       <pre-code class="xml">{{ demoCodes[0] }}</pre-code>
       <pre-code class="javascript">{{ demoCodes[1] }}</pre-code>
     </pre>
+
+    <p class="tip">
+      [Setaria]当指定 <table-api-link prop="valid-config"/> 配置项中 <span style="color: blue">message</span> 属性为 <span style="color: blue">inline</span>
+      且表格数据只有一条的场合，此时会增大表格的高度以用于显示错误消息，当不显示错误消息时，表格高度会自动恢复。<br/>
+      <span style="color: red">在如上场合vxe-table原有逻辑为显示append到body的错误消息，但此时滚动页面时，消息也会随之滚动。</span>
+    </p>
+
+    <vxe-toolbar>
+      <template #buttons>
+        <vxe-button @click="insertEvent">新增</vxe-button>
+        <vxe-button @click="$refs.xTable.removeCheckboxRow()">删除选中</vxe-button>
+        <vxe-button @click="validEvent">快速校验</vxe-button>
+        <vxe-button @click="fullValidEvent">完整快速校验</vxe-button>
+        <vxe-button @click="validAllEvent">全量数据校验</vxe-button>
+        <vxe-button @click="selectValidEvent">选中行校验</vxe-button>
+        <vxe-button @click="getSelectEvent">获取选中</vxe-button>
+        <vxe-button @click="getInsertEvent">获取新增</vxe-button>
+        <vxe-button @click="getRemoveEvent">获取删除</vxe-button>
+        <vxe-button @click="getUpdateEvent">获取修改</vxe-button>
+      </template>
+    </vxe-toolbar>
+
+    <vxe-table
+      border
+      show-overflow
+      keep-source
+      ref="xTable"
+      max-height="300"
+      :data="[tableData[0]]"
+      :edit-rules="validRules"
+      :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
+      :valid-config="{message: 'inline'}">
+      <vxe-column type="checkbox" width="60"></vxe-column>
+      <vxe-column type="seq" width="60"></vxe-column>
+      <vxe-column field="name" title="Name" :edit-render="{name: 'input'}"></vxe-column>
+      <vxe-column field="role" title="Role" :edit-render="{name: '$input'}"></vxe-column>
+      <vxe-column field="sex2" title="Sex" :edit-render="{name: 'input'}"></vxe-column>
+      <vxe-column field="age" title="Age" :edit-render="{name: '$input', props: {type: 'integer'}}"></vxe-column>
+      <vxe-column field="date" title="Date" :edit-render="{name: '$input', props: {type: 'date'}}"></vxe-column>
+    </vxe-table>
   </div>
 </template>
 

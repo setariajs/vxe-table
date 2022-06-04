@@ -662,6 +662,24 @@ export default {
     mergeFooterItems (value) {
       this.clearMergeFooterItems()
       this.$nextTick(() => this.setMergeFooterItems(value))
+    },
+    validStore: {
+      deep: true,
+      handler (val) {
+        const { tableBody } = this.$refs
+        const bodyElem = tableBody.$el
+        if (typeof val.originBodyHeight === 'number' &&
+          typeof val.currentBodyHeight === 'number' &&
+          val.column === null &&
+          val.currentBodyHeight === bodyElem.clientHeight) {
+          console.log('[vxe-table] set body height to origin height when hide error message')
+          bodyElem.style.height = `${val.originBodyHeight}px`
+          this.$nextTick(() => {
+            val.originBodyHeight = null
+            val.currentBodyHeight = null
+          })
+        }
+      }
     }
   },
   created () {
