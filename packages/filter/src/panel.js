@@ -11,7 +11,9 @@ export default {
   computed: {
     hasCheckOption () {
       const { filterStore } = this
-      return filterStore && filterStore.options.some(option => option.checked)
+      // return filterStore && filterStore.options.some(option => option.checked)
+      // 修复没有复选框被选中的场合，筛选按钮仍可点击的问题
+      return filterStore && filterStore.options.some(option => option._checked)
     }
   },
   render (h) {

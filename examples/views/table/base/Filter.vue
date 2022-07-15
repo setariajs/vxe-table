@@ -201,8 +201,8 @@ export default {
         const nameColumn = $table.getColumnByField('name')
         if (nameColumn) {
           $table.setFilter(nameColumn, [
-            { label: 'id大于10002', value: 10002 },
-            { label: 'id大于10003', value: 10003 }
+            { label: 'id大于10002', value: 10002, checked: true, resetValue: true },
+            { label: 'id大于10003', value: 10003, checked: true, resetValue: true }
           ])
         }
       }
