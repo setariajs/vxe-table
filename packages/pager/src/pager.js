@@ -17,7 +17,7 @@ export default {
     pageSize: { type: Number, default: () => GlobalConfig.pager.pageSize || 10 },
     // 总条数
     total: { type: Number, default: 0 },
-    // 显示页码按钮的数量
+    // 显示页码按钮的数量，不建议设置为其他值
     pagerCount: { type: Number, default: () => GlobalConfig.pager.pagerCount || 7 },
     // 每页大小选项列表
     pageSizes: { type: Array, default: () => GlobalConfig.pager.pageSizes || [10, 15, 20, 50, 100] },
@@ -66,6 +66,15 @@ export default {
       return rest
     },
     offsetNumber () {
+      // 解决前后边界case，避免首页和尾页显示1...2或29...30
+      if (this.inpCurrPage === 4 ||
+        this.pageCount - this.inpCurrPage === 3) {
+        // !FIXME 对于pagerCount小于7的情况，目前没有找到规律
+        if (this.pagerCount === 7) {
+          return this.pageCount - this.pagerCount < Math.round((this.pagerCount - 2) / 2)
+            ? this.pagerCount - 4 : this.pagerCount - 2
+        }
+      }
       return Math.floor((this.pagerCount - 2) / 2)
     },
     sizeList () {
